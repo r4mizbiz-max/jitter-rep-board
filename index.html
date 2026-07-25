@@ -16,30 +16,33 @@
   .top { display:flex; align-items:center; justify-content:space-between; padding:16px 28px; border-bottom:1px solid var(--line); background:var(--bg); }
   .top img { height:22px; }
   .top .tag { letter-spacing:.35em; font-size:11px; color:var(--mut); text-transform:uppercase; }
-  main { flex:1; max-width:980px; width:100%; margin:0 auto; padding:30px 20px 70px; position:relative; z-index:1; }
+  main { flex:1; max-width:760px; width:100%; margin:0 auto; padding:34px 20px 70px; position:relative; z-index:1; }
   h1 { font-size:22px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; }
-  .sub { color:var(--mut); font-size:13.5px; margin-bottom:20px; }
-  .card { background:var(--panel); border:1px solid var(--line); padding:20px 22px; margin-bottom:18px; }
-  .rules { display:flex; flex-wrap:wrap; gap:10px; }
-  .rule { border:1px solid var(--line); background:#0d0d0d; padding:8px 14px; font-size:13px; color:var(--mut); }
-  .rule b { color:var(--fg); }
-  .gridwrap { overflow-x:auto; }
-  table { border-collapse:collapse; width:100%; }
-  th, td { border:1px solid #1e1e1e; padding:10px 12px; text-align:center; font-size:14px; white-space:nowrap; }
-  th { background:#0d0d0d; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); }
-  td.rowhead { background:#0d0d0d; font-weight:800; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--mut); text-align:left; }
-  .slot-open { background:#062d13; color:#4ade80; font-weight:800; }
-  .slot-zero { color:#3a3a3a; }
-  .badge { display:inline-block; margin-left:8px; font-size:10px; font-weight:800; letter-spacing:.08em; padding:2px 8px; text-transform:uppercase; }
-  .b-mid { background:#172554; color:#93c5fd; }
-  .b-south { background:#3a3000; color:#fde047; }
-  .b-north { background:#3b0764; color:#d8b4fe; }
-  .b-any { background:#052e16; color:#86efac; }
-  .meta { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; color:var(--dim); font-size:12px; }
-  .meta a { color:var(--mut); }
-  .err { border:1px solid #7f1d1d; background:#1c0a0a; color:#fca5a5; padding:16px 18px; font-size:14px; display:none; }
-  .err code { background:#000; padding:2px 6px; font-size:12px; }
-  button.refresh { background:#fafafa; color:#0a0a0a; border:0; padding:8px 16px; font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; }
+  .sub { color:var(--mut); font-size:13.5px; margin-bottom:22px; }
+  .card { background:var(--panel); border:1px solid var(--line); padding:22px; margin-bottom:18px; }
+  label { display:block; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-bottom:8px; font-weight:700; }
+  .addr-row { display:flex; gap:10px; flex-wrap:wrap; }
+  input { flex:1; min-width:240px; background:#0d0d0d; border:1px solid var(--line); color:var(--fg); padding:14px 16px; font-size:16px; outline:none; }
+  input:focus { border-color:#fafafa; }
+  button { background:#fafafa; color:#0a0a0a; border:0; padding:14px 26px; font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; }
+  button:disabled { opacity:.5; cursor:wait; }
+  .region { display:none; margin-top:14px; font-size:14px; color:var(--mut); }
+  .region b { color:#fff; }
+  .pill { display:inline-block; font-size:11px; font-weight:800; letter-spacing:.1em; padding:3px 10px; text-transform:uppercase; margin-left:6px; }
+  .p-mid { background:#172554; color:#93c5fd; } .p-north { background:#3b0764; color:#d8b4fe; } .p-south { background:#3a3000; color:#fde047; }
+  #results { display:none; }
+  .slot { display:flex; align-items:center; justify-content:space-between; gap:12px; border:1px solid #163a21; background:#08210f; padding:14px 18px; margin-bottom:10px; flex-wrap:wrap; }
+  .slot .when { font-weight:800; font-size:17px; color:#4ade80; }
+  .slot .what { color:var(--mut); font-size:13px; }
+  .noslots { border:1px solid #7f1d1d; background:#1c0a0a; color:#fca5a5; padding:16px 18px; font-size:14px; }
+  .rules { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+  .rule { border:1px solid var(--line); background:#0d0d0d; padding:6px 12px; font-size:12px; color:var(--mut); }
+  details { margin-top:6px; }
+  summary { cursor:pointer; color:var(--dim); font-size:12px; letter-spacing:.1em; text-transform:uppercase; }
+  table { border-collapse:collapse; width:100%; margin-top:12px; }
+  th, td { border:1px solid #1e1e1e; padding:8px 10px; text-align:center; font-size:13px; white-space:nowrap; }
+  th { background:#0d0d0d; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); }
+  .meta { color:var(--dim); font-size:12px; margin-top:6px; }
   footer { text-align:center; color:#3d3d3d; font-size:11px; letter-spacing:.3em; text-transform:uppercase; padding:20px; }
 </style>
 </head>
@@ -50,128 +53,146 @@
   <div class="tag">Growth · Rep Board</div>
 </div>
 <main>
-  <h1>Sarasota Rep Availability</h1>
-  <p class="sub">Live from the client's Google Sheet. This client books a max of <b>2 days in advance</b> — only book inside that window.</p>
+  <h1>Sarasota Slot Finder</h1>
+  <p class="sub">Paste the lead's address — it figures out north / south / Sarasota for you and shows only the slots you're allowed to book. Max <b>2 days out</b>.</p>
 
-  <div class="card rules">
-    <div class="rule"><b>Slots:</b> 10am · 2pm · 6pm</div>
-    <div class="rule"><b>Book window:</b> today + 2 days MAX</div>
-    <div class="rule"><b>MID</b> = Sarasota city only</div>
-    <div class="rule"><b>SOUTH</b> = south of Sarasota only</div>
-    <div class="rule"><b>NORTH</b> = north of Sarasota only</div>
-    <div class="rule"><b>Number, no label</b> = book anywhere</div>
-    <div class="rule"><b>0</b> = no slots, do not book</div>
+  <div class="card">
+    <label>Lead's address</label>
+    <div class="addr-row">
+      <input id="addr" placeholder="4620 Ashton Rd, Sarasota FL" autofocus>
+      <button id="go">Find slots</button>
+    </div>
+    <div class="region" id="region"></div>
   </div>
 
-  <div class="err" id="err">
-    No availability data yet — the sync runs automatically every 20 minutes. If this persists, tell Ram.
-  </div>
+  <div class="card" id="results"></div>
 
-  <div class="card gridwrap"><div id="grid" style="color:var(--dim);font-size:14px">Loading availability…</div></div>
-
-  <div class="meta">
-    <span id="stamp">—</span>
-    <span>
-      <a href="https://docs.google.com/spreadsheets/d/13WwiKgLkVNo37YtHHn3bGtkHsDfGyoaVlVyrb0jI-aE/edit?gid=0" target="_blank" rel="noopener">Open the sheet ↗</a>
-      &nbsp;&nbsp;<button class="refresh" onclick="load()">Refresh</button>
-    </span>
+  <div class="card">
+    <div class="rules">
+      <div class="rule">Book max 2 days out</div>
+      <div class="rule">Slots: 10am · 2pm · 6pm</div>
+      <div class="rule">0 / x = closed</div>
+      <div class="rule">mid = Sarasota city · north/south = that side only</div>
+    </div>
+    <details><summary>Raw schedule grid</summary><div id="grid"></div></details>
+    <div class="meta" id="stamp">Loading schedule…</div>
   </div>
 </main>
 <footer>We book qualified appointments. That's it.</footer>
 
 <script>
-const SHEET = "13WwiKgLkVNo37YtHHn3bGtkHsDfGyoaVlVyrb0jI-aE";
-// Apps Script relay (runs as Ram, works while the sheet stays private) — filled in once Ram deploys it
 const RELAY = "https://onboard.jittergrowth.com/api/rep-rows";
-const CSV = `https://docs.google.com/spreadsheets/d/${SHEET}/gviz/tq?tqx=out:csv&gid=0&cb=`;
+// Sarasota city latitude band — inside = MID, above = NORTH, below = SOUTH
+const MID_N = 27.40, MID_S = 27.26;
+const TIME_LABEL = { "10a": "10:00 AM", "2p": "2:00 PM", "6p": "6:00 PM" };
+let DATA = null, LAST = null;
 
-function parseCSV(text) {
-  const rows = [];
-  let row = [], cell = "", q = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (q) {
-      if (c === '"' && text[i + 1] === '"') { cell += '"'; i++; }
-      else if (c === '"') q = false;
-      else cell += c;
-    } else if (c === '"') q = true;
-    else if (c === ",") { row.push(cell); cell = ""; }
-    else if (c === "\n" || c === "\r") {
-      if (c === "\r" && text[i + 1] === "\n") i++;
-      row.push(cell); rows.push(row); row = []; cell = "";
-    } else cell += c;
-  }
-  if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
-  return rows;
-}
-
-function renderCell(raw) {
-  const v = (raw || "").trim();
-  if (v === "") return "";
-  const m = v.match(/^(\d+)\s*(mid|middle|south|s|north|n)?\.?$/i);
-  if (!m) return escapeHtml(v); // headers / free text pass through
+function parseCell(raw) {
+  const v = String(raw || "").trim().toLowerCase();
+  if (!v || v === "x" || v === "0") return null;
+  const m = v.match(/^(\d+)\s*\(?\s*(mid|middle|south|north)?(?:\s*only)?\s*\)?$/);
+  if (!m) return null;
   const count = Number(m[1]);
-  if (count === 0) return '<span class="slot-zero">0</span>';
-  let badge = '<span class="badge b-any">Anywhere</span>';
-  const reg = (m[2] || "").toLowerCase();
-  if (reg.startsWith("m")) badge = '<span class="badge b-mid">Mid / Sarasota</span>';
-  else if (reg.startsWith("s")) badge = '<span class="badge b-south">South only</span>';
-  else if (reg.startsWith("n")) badge = '<span class="badge b-north">North only</span>';
-  return `<span class="slot-open">${count}</span>${badge}`;
+  if (!count) return null;
+  let region = "any";
+  if (m[2]) region = m[2].startsWith("mid") ? "mid" : m[2];
+  return { count, region };
 }
 
-function escapeHtml(s) {
-  return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+function regionAllows(cellRegion, leadRegion) {
+  return cellRegion === "any" || cellRegion === leadRegion;
 }
 
-function isOpenCell(raw) {
-  const m = (raw || "").trim().match(/^(\d+)/);
-  return m && Number(m[1]) > 0;
-}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 
-async function load() {
-  const err = document.getElementById("err");
-  const grid = document.getElementById("grid");
+async function loadData() {
   try {
-    let rows = null;
-    if (RELAY) {
-      const res = await fetch(RELAY + "?cb=" + Date.now());
-      if (res.ok) rows = (await res.json()).rows.map((r) => r.map((c) => String(c ?? "")));
-    }
-    if (!rows) {
-      const res = await fetch(CSV + Date.now());
-      const text = await res.text();
-      if (!res.ok || text.trim().startsWith("<")) throw new Error("sheet not readable");
-      rows = parseCSV(text);
-    }
-    rows = rows.filter((r) => r.some((c) => (c || "").trim() !== ""));
-    if (!rows.length) { grid.innerHTML = "Sheet is empty."; return; }
-    const width = Math.max(...rows.map((r) => r.length));
-    let html = "<table>";
-    rows.forEach((r, ri) => {
-      html += "<tr>";
-      for (let ci = 0; ci < width; ci++) {
-        const raw = r[ci] || "";
-        if (ri === 0) html += `<th>${escapeHtml(raw)}</th>`;
-        else if (ci === 0) html += `<td class="rowhead">${escapeHtml(raw)}</td>`;
-        else {
-          const cls = isOpenCell(raw) ? "" : "";
-          html += `<td>${renderCell(raw)}</td>`;
-        }
-      }
-      html += "</tr>";
-    });
-    html += "</table>";
-    grid.innerHTML = html;
-    err.style.display = "none";
-    document.getElementById("stamp").textContent = "Updated " + new Date().toLocaleTimeString() + " — auto-refreshes every 60s";
-  } catch (e) {
-    err.style.display = "block";
-    grid.innerHTML = '<span style="color:var(--dim)">Waiting for sheet access…</span>';
+    const res = await fetch(RELAY + "?cb=" + Date.now());
+    if (!res.ok) throw 0;
+    DATA = await res.json();
+    document.getElementById("stamp").textContent =
+      "Schedule synced " + new Date(DATA.updated).toLocaleString() + " — re-syncs every 20 min";
+    renderGrid();
+    if (LAST) showSlots(LAST);
+  } catch {
+    document.getElementById("stamp").textContent = "No schedule data yet — tell Ram.";
   }
 }
-load();
-setInterval(load, 60000);
+
+function renderGrid() {
+  const rows = DATA.rows;
+  let html = "<table>";
+  rows.forEach((r, i) => {
+    html += "<tr>" + r.map((c) => i < 2 ? `<th>${esc(c)}</th>` : `<td>${esc(c)}</td>`).join("") + "</tr>";
+  });
+  document.getElementById("grid").innerHTML = html + "</table>";
+}
+
+function findSlots(leadRegion) {
+  // rows[0] = day per column, rows[1] = service per column, rows[2+] = [time, cells...]
+  const [days, services, ...times] = DATA.rows;
+  const out = [];
+  for (const row of times) {
+    const time = String(row[0] || "").trim();
+    for (let c = 1; c < row.length; c++) {
+      const cell = parseCell(row[c]);
+      if (cell && regionAllows(cell.region, leadRegion)) {
+        out.push({
+          day: String(days[c] || "").trim(),
+          service: String(services[c] || "").trim(),
+          time: TIME_LABEL[time.toLowerCase()] || time,
+          count: cell.count,
+          region: cell.region,
+        });
+      }
+    }
+  }
+  return out;
+}
+
+function showSlots(leadRegion) {
+  LAST = leadRegion;
+  const box = document.getElementById("results");
+  box.style.display = "block";
+  const slots = findSlots(leadRegion);
+  if (!slots.length) {
+    box.innerHTML = '<div class="noslots">No bookable slots for this area right now. Check back after the next sync or escalate to Ram.</div>';
+    return;
+  }
+  box.innerHTML = "<label>You can book</label>" + slots.map((s) => `
+    <div class="slot">
+      <span class="when">${esc(s.day)} · ${esc(s.time)}</span>
+      <span class="what">${esc(s.service)} — ${s.count} slot${s.count > 1 ? "s" : ""}${s.region !== "any" ? " · " + esc(s.region) + " area" : ""}</span>
+    </div>`).join("");
+}
+
+async function locate() {
+  const q = document.getElementById("addr").value.trim();
+  if (!q) return;
+  const btn = document.getElementById("go"), reg = document.getElementById("region");
+  btn.disabled = true; btn.textContent = "Locating…";
+  try {
+    const res = await fetch("https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=us&q=" + encodeURIComponent(/fl|florida/i.test(q) ? q : q + ", FL"));
+    const hits = await res.json();
+    if (!hits.length) { reg.style.display = "block"; reg.innerHTML = "Couldn't find that address — add city + FL."; return; }
+    const lat = Number(hits[0].lat);
+    const leadRegion = lat > MID_N ? "north" : lat < MID_S ? "south" : "mid";
+    const pill = { mid: '<span class="pill p-mid">Sarasota / Mid</span>', north: '<span class="pill p-north">North of Sarasota</span>', south: '<span class="pill p-south">South of Sarasota</span>' }[leadRegion];
+    reg.style.display = "block";
+    reg.innerHTML = `<b>${esc(hits[0].display_name.split(",").slice(0, 3).join(","))}</b> → ${pill}`;
+    if (!DATA) await loadData();
+    showSlots(leadRegion);
+  } catch {
+    reg.style.display = "block"; reg.textContent = "Lookup failed — try again.";
+  } finally {
+    btn.disabled = false; btn.textContent = "Find slots";
+  }
+}
+
+document.getElementById("go").addEventListener("click", locate);
+document.getElementById("addr").addEventListener("keydown", (e) => { if (e.key === "Enter") locate(); });
+loadData();
+setInterval(loadData, 5 * 60 * 1000);
 </script>
 </body>
 </html>
