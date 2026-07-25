@@ -81,6 +81,8 @@
 
 <script>
 const SHEET = "13WwiKgLkVNo37YtHHn3bGtkHsDfGyoaVlVyrb0jI-aE";
+// Apps Script relay (runs as Ram, works while the sheet stays private) — filled in once Ram deploys it
+const RELAY = "";
 const CSV = `https://docs.google.com/spreadsheets/d/${SHEET}/gviz/tq?tqx=out:csv&gid=0&cb=`;
 
 function parseCSV(text) {
@@ -131,10 +133,18 @@ async function load() {
   const err = document.getElementById("err");
   const grid = document.getElementById("grid");
   try {
-    const res = await fetch(CSV + Date.now());
-    const text = await res.text();
-    if (!res.ok || text.trim().startsWith("<")) throw new Error("sheet not public");
-    const rows = parseCSV(text).filter((r) => r.some((c) => (c || "").trim() !== ""));
+    let rows = null;
+    if (RELAY) {
+      const res = await fetch(RELAY + "?cb=" + Date.now());
+      if (res.ok) rows = (await res.json()).rows.map((r) => r.map((c) => String(c ?? "")));
+    }
+    if (!rows) {
+      const res = await fetch(CSV + Date.now());
+      const text = await res.text();
+      if (!res.ok || text.trim().startsWith("<")) throw new Error("sheet not readable");
+      rows = parseCSV(text);
+    }
+    rows = rows.filter((r) => r.some((c) => (c || "").trim() !== ""));
     if (!rows.length) { grid.innerHTML = "Sheet is empty."; return; }
     const width = Math.max(...rows.map((r) => r.length));
     let html = "<table>";
