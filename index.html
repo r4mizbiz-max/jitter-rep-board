@@ -64,7 +64,7 @@
   </div>
 
   <div class="err" id="err">
-    Can't read the sheet yet. Ram: open the sheet → <b>Share</b> → General access → <b>Anyone with the link · Viewer</b>. This page will pick it up automatically.
+    No availability data yet — the sync runs automatically every 20 minutes. If this persists, tell Ram.
   </div>
 
   <div class="card gridwrap"><div id="grid" style="color:var(--dim);font-size:14px">Loading availability…</div></div>
@@ -82,7 +82,7 @@
 <script>
 const SHEET = "13WwiKgLkVNo37YtHHn3bGtkHsDfGyoaVlVyrb0jI-aE";
 // Apps Script relay (runs as Ram, works while the sheet stays private) — filled in once Ram deploys it
-const RELAY = "";
+const RELAY = "https://onboard.jittergrowth.com/api/rep-rows";
 const CSV = `https://docs.google.com/spreadsheets/d/${SHEET}/gviz/tq?tqx=out:csv&gid=0&cb=`;
 
 function parseCSV(text) {
