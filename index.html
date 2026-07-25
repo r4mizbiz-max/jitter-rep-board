@@ -135,6 +135,8 @@ function findSlots(leadRegion) {
   for (const row of times) {
     const time = String(row[0] || "").trim();
     for (let c = 1; c < row.length; c++) {
+      // BATH ONLY — Ram's rule: never book the Water column
+      if (!/bath/i.test(String(services[c] || ""))) continue;
       const cell = parseCell(row[c]);
       if (cell && regionAllows(cell.region, leadRegion)) {
         out.push({
@@ -162,7 +164,7 @@ function showSlots(leadRegion) {
   box.innerHTML = "<label>You can book</label>" + slots.map((s) => `
     <div class="slot">
       <span class="when">${esc(s.day)} · ${esc(s.time)}</span>
-      <span class="what">${esc(s.service)} — ${s.count} slot${s.count > 1 ? "s" : ""}${s.region !== "any" ? " · " + esc(s.region) + " area" : ""}</span>
+      <span class="what">${s.count} slot${s.count > 1 ? "s" : ""}${s.region !== "any" ? " · " + esc(s.region) + " area" : ""}</span>
     </div>`).join("");
 }
 
